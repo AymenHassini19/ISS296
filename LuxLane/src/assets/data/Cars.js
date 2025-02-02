@@ -72,3 +72,5 @@ const cars = [
         images:["@/assets/cars/242tunis6931/1.jpg","@/assets/cars/242tunis6931/2.jpg","@/assets/cars/242tunis6931/3.jpg"]
     }
 ]
+
+export default cars;
