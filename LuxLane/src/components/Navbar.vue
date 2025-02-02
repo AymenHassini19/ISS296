@@ -1,6 +1,6 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
+    <nav class="navbar navbar-expand-lg custom-navbar">
+      <a class="navbar-brand" href="#">LuxLane</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -16,9 +16,9 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home </a>
+            <a class="nav-link" href="#">Home</a>
           </li>
-
+  
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -43,7 +43,7 @@
               <li><a class="dropdown-item" href="#">Range Rover</a></li>
             </ul>
           </li>
-
+  
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -63,11 +63,11 @@
               <li><a class="dropdown-item" href="#">Another New Action</a></li>
             </ul>
           </li>
-
         </ul>
-        <form class="d-flex">
+  
+        <form class="d-flex mx-auto">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <button class="btn btn-outline-light" type="submit">Search</button>
         </form>
       </div>
     </nav>
@@ -79,8 +79,28 @@
   </script>
   
   <style scoped>
-  .form-control {
-    margin-right: 10px;
+  .custom-navbar {
+    background-color: rgba(0, 0, 0, 0.616); /* Black transparent background */
+  }
+  
+  .navbar-nav .nav-link,
+  .navbar-brand,
+  .btn-outline-light {
+    color: white !important; /* White text for nav items and brand */
+  }
+  
+  .navbar-toggler-icon {
+    background-color: white;
+  }
+  .dropdown-menu {
+    background-color: rgba(0, 0, 0, 0.726); /* Black dropdown background */
+  }
+  
+  .dropdown-menu .dropdown-item {
+    color: white !important;
+  }
+  
+  .dropdown-menu .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
   }
   </style>
-  
