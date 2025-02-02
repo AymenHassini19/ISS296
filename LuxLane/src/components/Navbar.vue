@@ -16,11 +16,9 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="#">Home </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
+
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -30,20 +28,42 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Dropdown
+              Brands
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-              <li><a class="dropdown-item" href="#">New Action</a></li>
+              <li><a class="dropdown-item" href="#">Rolls-Royce</a></li>
+              <li><a class="dropdown-item" href="#">Bentley</a></li>
+              <li><a class="dropdown-item" href="#">Aston Martin</a></li>
+              <li><a class="dropdown-item" href="#">Lamborghini</a></li>
+              <li><a class="dropdown-item" href="#">Ferrari</a></li>
+              <li><a class="dropdown-item" href="#">McLaren</a></li>
+              <li><a class="dropdown-item" href="#">Porsche</a></li>
+              <li><a class="dropdown-item" href="#">Mercedes</a></li>
+              <li><a class="dropdown-item" href="#">BMW</a></li>
+              <li><a class="dropdown-item" href="#">Range Rover</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Categories
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Supercar</a></li>
+              <li><a class="dropdown-item" href="#">Convertible</a></li>
+              <li><a class="dropdown-item" href="#">SUV</a></li>
+              <li><a class="dropdown-item" href="#">Sedan</a></li>
               <li><a class="dropdown-item" href="#">Another New Action</a></li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
+
         </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
