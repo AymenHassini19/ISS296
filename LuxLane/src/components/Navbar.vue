@@ -52,6 +52,7 @@
         </v-list>
       </v-menu>
 
+      
       <!-- Search Bar (unchanged) -->
       <v-text-field
         v-model="searchQuery"
@@ -63,12 +64,40 @@
       ></v-text-field>
     </div>
 
+    <!-- Admin Dropdown Menu -->
+    <v-menu v-if="isAdmin" open-on-hover>
+        <template v-slot:activator="{ props }">
+          <v-btn v-bind="props" class="gradient-button">
+            Admin
+            <v-icon class="ml-2">mdi-chevron-down</v-icon>
+          </v-btn>
+        </template>
+        <v-list class="glassmorphic-menu">
+          <v-list-item @click="goToAdmin('requests')">
+            <v-icon class="mr-2">mdi-file-document</v-icon>
+            <v-list-item-title>Requests</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="goToAdmin('bookings')">
+            <v-icon class="mr-2">mdi-calendar-check</v-icon>
+            <v-list-item-title>Bookings</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="goToAdmin('users')">
+            <v-icon class="mr-2">mdi-account-group</v-icon>
+            <v-list-item-title>Users</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="goToAdmin('cars')">
+            <v-icon class="mr-2">mdi-car</v-icon>
+            <v-list-item-title>Cars</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
+
     <!-- Right Side: User Profile/Login -->
     <div class="navbar-right">
       <v-menu v-if="isLoggedIn" open-on-hover>
         <template v-slot:activator="{ props }">
           <v-avatar v-bind="props" :src="userPhoto" size="40" ></v-avatar>
-
         </template>
         <v-list class="glassmorphic-menu">
           <v-list-item @click="settingsDialog = true">
@@ -131,7 +160,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import defaultUserImage from '@/assets/default_user.png';
 
@@ -139,6 +168,7 @@ const router = useRouter();
 const searchQuery = ref("");
 
 const isLoggedIn = ref(false);
+const isAdmin = ref(false);
 const userPhoto = ref("");
 
 // Check login status on mount
@@ -151,7 +181,9 @@ onMounted(() => {
 
 // Computed property to dynamically check login state
 const updateLoginStatus = () => {
-  isLoggedIn.value = !!localStorage.getItem('loggedInUser');
+  const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+  isLoggedIn.value = !!loggedInUser;
+  isAdmin.value = loggedInUser ? loggedInUser.isAdmin : false;
 };
 
 // Logout function
@@ -173,9 +205,10 @@ const navigateToBrand = (brand) =>
   router.push(`/brand/${brand.toLowerCase().replace(/\s+/g, "-")}`);
 const navigateToSupport = (route) => router.push(route);
 
+// Admin Navigation Function
+const goToAdmin = (section) => router.push(`/admin/${section}`);
+
 // User Authentication (Mock Data)
-
-
 
 const settingsDialog = ref(false);
 

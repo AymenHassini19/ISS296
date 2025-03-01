@@ -61,7 +61,7 @@ const login = () => {
   if (form.value.validate()) {
     const user = users.find((u) => u.email === email.value && u.password === password.value);
     if (user) {
-      localStorage.setItem('loggedInUser', JSON.stringify({ email: user.email }));
+      localStorage.setItem('loggedInUser', JSON.stringify(user));
       window.dispatchEvent(new Event('storage')); // Notify other components
       router.push('/'); // Redirect to home
     } else {
