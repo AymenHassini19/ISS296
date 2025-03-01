@@ -85,10 +85,18 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const dealOfTheDay = ref(null);
+
+const loadCarsFromLocalStorage = () => {
+  const storedCars = localStorage.getItem('carsList');
+  return storedCars ? JSON.parse(storedCars) : cars;
+};
+
+const carsList = ref(loadCarsFromLocalStorage());
+
 const displayedCars = computed(() => {
   let groups = [];
-  for (let i = 0; i < cars.length; i += 3) {
-    groups.push(cars.slice(i, i + 3));
+  for (let i = 0; i < carsList.value.length; i += 3) {
+    groups.push(carsList.value.slice(i, i + 3));
   }
   return groups;
 });
@@ -101,7 +109,7 @@ const sponsors = ref([
 ]);
 
 onMounted(() => {
-  dealOfTheDay.value = cars[Math.floor(Math.random() * cars.length)];
+  dealOfTheDay.value = carsList.value[Math.floor(Math.random() * carsList.value.length)];
 });
 
 const goToCarDetails = (carId) => {
@@ -146,7 +154,6 @@ const getImage = (path) => {
 
 /* ✅ Sponsor Section with Blurry Background */
 .sponsor-section {
-  background: url('@/assets/sponser_background.avif') center/cover;
   padding: 50px;
   position: relative;
 }
@@ -157,7 +164,7 @@ const getImage = (path) => {
   padding: 50px;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 200px; /* Increased gap for more spacing */
   flex-wrap: wrap;
 }
 

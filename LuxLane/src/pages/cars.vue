@@ -62,14 +62,32 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import cars from '@/assets/data/Cars.js';
 
-const carsList = ref(cars);
 const router = useRouter();
 const editDialog = ref(false);
 const editCar = ref({});
+
+const loadCarsFromLocalStorage = () => {
+  const storedCars = localStorage.getItem('carsList');
+  return storedCars ? JSON.parse(storedCars) : [];
+};
+
+const carsList = ref(loadCarsFromLocalStorage());
+
+const saveCarsToLocalStorage = () => {
+  localStorage.setItem('carsList', JSON.stringify(carsList.value));
+};
+
+onMounted(() => {
+  if (carsList.value.length === 0) {
+    import('@/assets/data/Cars.js').then(module => {
+      carsList.value = module.default;
+      saveCarsToLocalStorage();
+    });
+  }
+});
 
 const goToCarDetails = (carId) => {
   router.push(`/car/${carId}`);
@@ -82,6 +100,7 @@ const getImage = (path) => {
 
 const deleteCar = (carId) => {
   carsList.value = carsList.value.filter(car => car.carId !== carId);
+  saveCarsToLocalStorage();
 };
 
 const openEditDialog = (car) => {
@@ -97,6 +116,7 @@ const saveEdit = () => {
   const index = carsList.value.findIndex(car => car.carId === editCar.value.carId);
   if (index !== -1) {
     carsList.value[index] = { ...editCar.value };
+    saveCarsToLocalStorage();
   }
   closeEditDialog();
 };
