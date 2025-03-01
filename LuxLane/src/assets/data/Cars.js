@@ -112,7 +112,7 @@ const cars = [
         images:["@/assets/cars/312paris4561/1.jpg","@/assets/cars/312paris4561/2.jpg","@/assets/cars/312paris4561/3.jpg"]
     },
     {
-        carId:"312paris4566",
+        carId:"315paris4566",
         brand:"Bentley",
         model:"Bentayga",
         year:2022,
@@ -123,7 +123,7 @@ const cars = [
         location:"Paris",
         description:"description of a car of the ",
         category:"SUV",
-        images:["@/assets/cars/312paris4561/1.jpg","@/assets/cars/312paris4561/2.jpg","@/assets/cars/312paris4561/3.jpg"]
+        images:["@/assets/cars/315paris4566/1.jpg","@/assets/cars/315paris4566/2.jpg","@/assets/cars/315paris4566/3.jpg"]
     },
     
 ]
