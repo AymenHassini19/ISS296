@@ -206,7 +206,7 @@ const navigateToBrand = (brand) =>
 const navigateToSupport = (route) => router.push(route);
 
 // Admin Navigation Function
-const goToAdmin = (section) => router.push(`/admin/${section}`);
+const goToAdmin = (section) => router.push(`/${section}`);
 
 // User Authentication (Mock Data)
 
