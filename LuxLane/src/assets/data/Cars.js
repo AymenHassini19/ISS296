@@ -85,8 +85,8 @@ const cars = [
     },
     {
         carId:"301paris7890",
-        brand:"Aston Martin",
-        model:"DB11",
+        brand:"Lamborghini",
+        model:"Urus",
         year:2020,
         seats:4,
         isConvertible:false,
@@ -94,13 +94,13 @@ const cars = [
         isAvailable:true,
         location:"Paris",
         description:"description of a car of the ",
-        category:"Supercar",
+        category:"SUV",
         images:["@/assets/cars/301paris7890/1.jpg","@/assets/cars/301paris7890/2.jpg","@/assets/cars/301paris7890/3.jpg"]
     },
     {
         carId:"312paris4561",
         brand:"Mercedes-Benz",
-        model:"S-Class",
+        model:"G-Class",
         year:2022,
         seats:5,
         isConvertible:false,
@@ -108,13 +108,13 @@ const cars = [
         isAvailable:true,
         location:"Paris",
         description:"description of a car of the ",
-        category:"Supercar",
+        category:"SUV",
         images:["@/assets/cars/312paris4561/1.jpg","@/assets/cars/312paris4561/2.jpg","@/assets/cars/312paris4561/3.jpg"]
     },
     {
         carId:"312paris4566",
-        brand:"Mercedes-Benz",
-        model:"S-Class",
+        brand:"Bentley",
+        model:"Bentayga",
         year:2022,
         seats:5,
         isConvertible:false,
@@ -122,7 +122,7 @@ const cars = [
         isAvailable:false,
         location:"Paris",
         description:"description of a car of the ",
-        category:"Supercar",
+        category:"SUV",
         images:["@/assets/cars/312paris4561/1.jpg","@/assets/cars/312paris4561/2.jpg","@/assets/cars/312paris4561/3.jpg"]
     },
     
