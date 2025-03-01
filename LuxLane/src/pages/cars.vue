@@ -5,6 +5,11 @@
       <v-row>
         <v-col v-for="car in carsList" :key="car.carId" cols="12" sm="6" md="4">
           <v-card>
+            <v-img :src="getImage(car.images[0])" height="200px" class="car-image">
+              <template #placeholder>
+                <div class="no-image">No Image Available</div>
+              </template>
+            </v-img>
             <v-card-title>{{ car.brand }} {{ car.model }}</v-card-title>
             <v-card-subtitle>Year: {{ car.year }}</v-card-subtitle>
             <v-card-text>
@@ -42,6 +47,11 @@ const router = useRouter();
 const goToCarDetails = (carId) => {
   router.push(`/car/${carId}`);
 };
+
+const getImage = (path) => {
+  if (!path) return "";
+  return new URL(path.replace("@/", "/src/"), import.meta.url).href;
+};
 </script>
 
 <style scoped>
@@ -51,5 +61,19 @@ const goToCarDetails = (carId) => {
 
 .v-card {
   margin-bottom: 20px;
+}
+
+.car-image {
+  object-fit: cover;
+}
+
+.no-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  background-color: #333; /* Dark background */
+  color: #f0f0f0; /* Light text */
+  font-size: 1.2rem;
 }
 </style>
