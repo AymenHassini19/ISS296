@@ -25,14 +25,39 @@
                 </v-col>
                 <v-col cols="12"><strong>Location:</strong> {{ car.location }}</v-col>
               </v-row>
-              <v-card-actions>
-                <v-btn color="primary" variant="plain" block @click="goToCarDetails(car.carId)">View More Details</v-btn>
-              </v-card-actions>
             </v-card-text>
+            <v-card-actions>
+              <v-btn color="primary" variant="plain" block @click="goToCarDetails(car.carId)">View More Details</v-btn>
+              <v-btn color="error" variant="plain" block @click="deleteCar(car.carId)">Delete</v-btn>
+              <v-btn color="warning" variant="plain" block @click="openEditDialog(car)">Modify</v-btn>
+            </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
     </v-container>
+
+    <!-- Edit Car Dialog -->
+    <v-dialog v-model="editDialog" max-width="500px">
+      <v-card>
+        <v-card-title>Edit Car</v-card-title>
+        <v-card-text>
+          <v-form ref="editForm">
+            <v-text-field v-model="editCar.brand" label="Brand"></v-text-field>
+            <v-text-field v-model="editCar.model" label="Model"></v-text-field>
+            <v-text-field v-model="editCar.year" label="Year" type="number"></v-text-field>
+            <v-text-field v-model="editCar.seats" label="Seats" type="number"></v-text-field>
+            <v-switch v-model="editCar.isConvertible" label="Convertible"></v-switch>
+            <v-text-field v-model="editCar.pricePerDay" label="Price/Day" type="number"></v-text-field>
+            <v-switch v-model="editCar.isAvailable" label="Available"></v-switch>
+            <v-text-field v-model="editCar.location" label="Location"></v-text-field>
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" @click="saveEdit">Save</v-btn>
+          <v-btn color="secondary" @click="closeEditDialog">Cancel</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -43,6 +68,8 @@ import cars from '@/assets/data/Cars.js';
 
 const carsList = ref(cars);
 const router = useRouter();
+const editDialog = ref(false);
+const editCar = ref({});
 
 const goToCarDetails = (carId) => {
   router.push(`/car/${carId}`);
@@ -51,6 +78,27 @@ const goToCarDetails = (carId) => {
 const getImage = (path) => {
   if (!path) return "";
   return new URL(path.replace("@/", "/src/"), import.meta.url).href;
+};
+
+const deleteCar = (carId) => {
+  carsList.value = carsList.value.filter(car => car.carId !== carId);
+};
+
+const openEditDialog = (car) => {
+  editCar.value = { ...car };
+  editDialog.value = true;
+};
+
+const closeEditDialog = () => {
+  editDialog.value = false;
+};
+
+const saveEdit = () => {
+  const index = carsList.value.findIndex(car => car.carId === editCar.value.carId);
+  if (index !== -1) {
+    carsList.value[index] = { ...editCar.value };
+  }
+  closeEditDialog();
 };
 </script>
 
@@ -75,5 +123,11 @@ const getImage = (path) => {
   background-color: #333; /* Dark background */
   color: #f0f0f0; /* Light text */
   font-size: 1.2rem;
+}
+
+.v-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 </style>
