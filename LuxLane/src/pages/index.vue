@@ -75,9 +75,12 @@
       <img v-for="(sponsor, index) in sponsors" :key="index" :src="sponsor.image" :alt="sponsor.name" class="sponsor-image" />
     </div>
   </div>
+
+  <ChatComponent class="chat-component-fixed" />
 </template>
 
 <script setup>
+import ChatComponent from '@/components/ChatComponent.vue';
 import homeVideo from '@/assets/home-video.mp4';
 import cars from '@/assets/data/Cars.js';
 import { ref, onMounted, computed } from "vue";
@@ -211,5 +214,12 @@ const getImage = (path) => {
 
 .card_margin {
   margin-top: 50px;
+}
+
+.chat-component-fixed {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
 }
 </style>
