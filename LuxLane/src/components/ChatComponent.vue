@@ -5,14 +5,14 @@
       </button>
   
       <div v-if="chatVisible" class="chatbot">
-        <h2>What do you need a car for ?</h2>
-    
+        <h2>What do you need a car for?</h2>
+  
         <div class="chat-window">
           <div v-for="(msg, index) in messages" :key="index" class="message">
             <strong>{{ msg.role === 'user' ? 'You' : 'AI' }}:</strong> {{ msg.content }}
           </div>
         </div>
-    
+  
         <input
           v-model="userInput"
           @keyup.enter="sendMessage"
@@ -30,16 +30,15 @@
       return {
         userInput: '',
         messages: [],
-        cars: [
-          { brand: 'Toyota', model: 'Corolla', price: 18000, seats: 5, fuel: 'Gasoline', type: 'Sedan' },
-          { brand: 'Tesla', model: 'Model 3', price: 35000, seats: 5, fuel: 'Electric', type: 'Sedan' },
-          { brand: 'Honda', model: 'CR-V', price: 27000, seats: 7, fuel: 'Gasoline', type: 'SUV' },
-          { brand: 'Hyundai', model: 'Ioniq 5', price: 40000, seats: 5, fuel: 'Electric', type: 'Crossover' },
-        ],
+        cars: this.loadCarsFromLocalStorage(),
         chatVisible: false
       };
     },
     methods: {
+      loadCarsFromLocalStorage() {
+        const storedCars = localStorage.getItem('carsList');
+        return storedCars ? JSON.parse(storedCars) : [];
+      },
       toggleChat() {
         this.chatVisible = !this.chatVisible;
       },
@@ -53,7 +52,7 @@
         const messages = [
           {
             role: 'system',
-            content: `You are a helpful assistant that suggests the best car from this list based on user needs:\n${carListString}`
+            content: `You are a helpful assistant that suggests the best car from this list based on user needs, keep responses short:\n${carListString}`
           },
           {
             role: 'user',
@@ -69,20 +68,23 @@
           const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers: {
-              "Authorization": "Bearer YOUR_API_KEY", // Replace with your actual key
-              "Content-Type": "application/json",
-              "HTTP-Referer": "http://localhost:5173", // Or your live site
-              "X-Title": "car-chatbot"
+              "Authorization": "Bearer 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", // Replace with your actual key
+              "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              model: "mistral/mistral-7b-instruct",
+              model: "deepseek/deepseek-chat-v3-0324:free", // Replace with the correct model if necessary
               messages: messages
             })
           });
   
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+  
           const data = await response.json();
           const reply = data.choices[0].message;
   
+          // Add AI's reply to messages
           this.messages.push(reply);
         } catch (err) {
           console.error("Error talking to AI:", err);
@@ -181,3 +183,4 @@
     position: relative;
   }
   </style>
+  
